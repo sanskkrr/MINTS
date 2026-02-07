@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home Page
+{% endblock title %}
+
+{% block content %}
+
+<div class="flex justify-center items-center min-h-[80vh] px-4">
+
+    <div class="w-full max-w-xl 
+                bg-white/5 backdrop-blur-xl
+                border border-white/10
+                rounded-3xl
+                shadow-2xl
+                p-8">
+
+        <h1 class="text-3xl font-bold mb-6 text-center">
+            {% if form.instance.pk %}
+                Edit Tweet
+            {% else %}
+                Create Tweet
+            {% endif %}
+        </h1>
+
+        <form method="post" enctype="multipart/form-data"
+              class="flex flex-col gap-5">
+            {% csrf_token %}
+
+            <!-- TEXTAREA -->
+            <div>
+                <label class="block mb-2 text-gray-300">
+                    What's happening? (300 characters max)
+                </label>
+
+                {{ form.text }}
+            </div>
+
+            <!-- IMAGE -->
+            <div>
+                <label class="block mb-2 text-gray-300">
+                    Add Image
+                </label>
+
+                {{ form.photo }}
+            </div>
+
+            <button class="mt-4 bg-white text-black font-semibold 
+                           py-3 rounded-xl
+                           hover:bg-gray-200 transition">
+                Submit
+            </button>
+
+        </form>
+
+        <a href="{% url 'tweet_list' %}"
+           class="block text-center mt-6 text-gray-400 hover:text-white">
+            ← Back to feed
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
